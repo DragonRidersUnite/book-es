@@ -4,7 +4,7 @@ require 'sitemap_generator'
 
 puts `mdbook build`
 
-SitemapGenerator::Sitemap.default_host = 'https://book.dragonriders.community'
+SitemapGenerator::Sitemap.default_host = 'https://book-es.dragonriders.community'
 SitemapGenerator::Sitemap.public_path = 'book'
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.create do
@@ -15,4 +15,4 @@ SitemapGenerator::Sitemap.create do
     add "/#{file}", changefreq: 'weekly'
   end
 end
-SitemapGenerator::Sitemap.ping_search_engines
+# SitemapGenerator::Sitemap.ping_search_engines

@@ -1,4 +1,6 @@
-# Building Games with DragonRuby
+# Building Games with DragonRuby (Spanish Edition)
+
+Currently being translated by @JorgeDDW.
 
 An open source book that walks you through how to build games with [DragonRuby Game Toolkit](https://dragonruby.org/toolkit/game).
 
