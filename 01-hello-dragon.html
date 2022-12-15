@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hello Dragon! - Building Games with DragonRuby</title>
+        <!-- Custom HTML head -->
+<meta property="og:title" content="Hello Dragon! | Building Games with DragonRuby">
+<meta property="og:type" content="book" />
+<meta property="og:image" content="https://book.dragonriders.community/img/cover.jpg" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Cover with red dragon icon and white background, which reads 'Building Games with DragonRuby: a comprehensive guide to shipping cross-platform guides with ease by Brett Chalupa and the Dragon Riders community'">
+
+        <meta name="description" content="A free book about making 2D games with DragonRuby Game Toolkit.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="01-hello-dragon.html" class="active"><strong aria-hidden="true">1.</strong> Hello Dragon!</a></li><li class="chapter-item expanded "><a href="02-player-movement.html"><strong aria-hidden="true">2.</strong> Player Movement</a></li><li class="chapter-item expanded "><a href="03-spit-fire.html"><strong aria-hidden="true">3.</strong> Spit Fire</a></li><li class="chapter-item expanded "><a href="04-target-practice.html"><strong aria-hidden="true">4.</strong> Target Practice</a></li><li class="chapter-item expanded "><a href="05-fireball-clean-up.html"><strong aria-hidden="true">5.</strong> Fireball Clean Up</a></li><li class="chapter-item expanded "><a href="06-time-attack.html"><strong aria-hidden="true">6.</strong> Time Attack</a></li><li class="chapter-item expanded "><a href="07-high-score.html"><strong aria-hidden="true">7.</strong> High-Score</a></li><li class="chapter-item expanded "><a href="08-sound.html"><strong aria-hidden="true">8.</strong> Sound</a></li><li class="chapter-item expanded "><a href="09-background.html"><strong aria-hidden="true">9.</strong> Background</a></li><li class="chapter-item expanded "><a href="10-animation.html"><strong aria-hidden="true">10.</strong> Animation</a></li><li class="chapter-item expanded "><a href="11-scenes.html"><strong aria-hidden="true">11.</strong> Scenes</a></li><li class="chapter-item expanded "><a href="12-ship-it.html"><strong aria-hidden="true">12.</strong> Ship It!</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="outro.html">Outro</a></li><li class="chapter-item expanded affix "><a href="ruby-primer.html">Ruby Primer</a></li><li class="chapter-item expanded affix "><a href="beyond-the-code.html">Beyond the Code</a></li><li class="chapter-item expanded affix "><a href="dragonruby-resources.html">DragonRuby Resources</a></li><li class="chapter-item expanded affix "><a href="game-dev-resources.html">Game Dev Resources</a></li><li class="chapter-item expanded affix "><a href="source-control.html">Source Control</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Building Games with DragonRuby</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/DragonRidersUnite/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="hello-dragon"><a class="header" href="#hello-dragon">Hello Dragon!</a></h1>
+<p>We'll start by rendering an image and some simple text on the screen. But first, we need to get our computer and DragonRuby Game Toolkit ready for developing games.</p>
+<h2 id="first-steps"><a class="header" href="#first-steps">First Steps</a></h2>
+<ol>
+<li><strong>Download a code editor:</strong> Since you'll be coding your game, you need a special text editor to write the code without any extra formatting that text editors like Microsoft Word add. <a href="https://code.visualstudio.com/">Visual Studio Code</a> is a great free editor. Download and install it. (Or use your own favorite editor.)</li>
+<li><strong>Get DragonRuby GTK:</strong> You need to get a copy of DragonRuby GTK so you can use the engine. <a href="https://dragonruby.itch.io/dragonruby-gtk/purchase">Buy it on itch.io and download the zip file for your operating system.</a></li>
+<li><strong>Extract the DRGTK engine zip</strong>: In your computer's file explorer, extract the engine zip file.</li>
+</ol>
+<p>You're ready to work on your game. Let's get to it!</p>
+<p><strong>ProTip:</strong> don't delete the zip file! You can unzip it again when the times comes to start working on your next game. It's helpful to keep it around.</p>
+<h2 id="whats-in-the-engine-zip"><a class="header" href="#whats-in-the-engine-zip">What's in the Engine Zip</a></h2>
+<p>When you download DragonRuby Game Toolkit, it contains everything you need to build your game. There are no external dependencies to install or monkey with. You just use the provided files and start making your game.</p>
+<p>Let's go over the key files in the archive you just extracted:</p>
+<ul>
+<li><code>dragonruby</code> — the executable you'll run to launch your game in development mode, your primary entry into the development flow</li>
+<li><code>dragonruby-publish</code> — a command-line tool to help you easily build and publish your game online, don't worry about this yet!</li>
+<li><code>samples/</code> — a folder of example code that you can explore and run if you'd like, or just ignore for now</li>
+<li><code>docs/</code> — the DragonRuby Game Toolkit docs for the version you've downloaded, extremely handy if you want to dive deeper than this book</li>
+<li><code>mygame/</code> 🌟 — as the name implies, this is where the code, graphics, sound, and other assets live for your game; this is the primary folder you'll be working in
+<ul>
+<li><code>app/</code> — this is where your Ruby code goes
+<ul>
+<li><code>main.rb</code> — this is the main file for your game code, don't worry about the other two yet</li>
+</ul>
+</li>
+<li><code>data/</code> — where you can put any data for your game, like level editor files</li>
+<li><code>fonts/</code> — where fonts go, duh!</li>
+<li><code>metadata/</code> — configuration files for your game, we'll do more here later</li>
+<li><code>sounds/</code> — where music and sound effects go</li>
+<li><code>sprites/</code> — where images go that will be rendered in the game; there are already some basic ones present</li>
+</ul>
+</li>
+</ul>
+<p>Don't worry about the other files yet. Focus on the <code>mygame/</code> directory, and, specifically, <code>mygame/app/main.rb</code>.</p>
+<h2 id="start-the-game"><a class="header" href="#start-the-game">Start the Game</a></h2>
+<p>Launch the <code>dragonruby</code> file.</p>
+<p>If you're on macOS, right-click the file and select &quot;Open&quot;. You'll need to ensure software from unverified sources can be run.</p>
+<p>Here's what gets displayed:</p>
+<p><img src="./img/hello-world.jpg" alt="screenshot of the Hello World! for DragonRuby GTK" /></p>
+<p>This isn't a game... yet! But it is doing three key things:</p>
+<ol>
+<li>Launching an app window</li>
+<li>Rendering text</li>
+<li>Displaying an image</li>
+</ol>
+<p>And you haven't even written any code yet. Not a bad starting place.</p>
+<p>DRGTK handles the boring stuff when it comes to making games—dealing with low-level APIs like graphics, sound, and the game window. We can instead focus on creating our game instead of, for example, figuring out how to save data in a way that's compartible with Linux, Mac, Windows, Android, iOS, and web.</p>
+<h2 id="an-overview-of-the-main-game-file"><a class="header" href="#an-overview-of-the-main-game-file">An Overview of the Main Game File</a></h2>
+<p>Let's take a look at what's in <code>mygame/app/main.rb</code>:</p>
+<pre><code class="language-ruby">def tick args
+  args.outputs.labels  &lt;&lt; [640, 500, 'Hello World!', 5, 1]
+  args.outputs.labels  &lt;&lt; [640, 460, 'Go to docs/docs.html and read it!', 5, 1]
+  args.outputs.labels  &lt;&lt; [640, 420, 'Join the Discord! https://discord.dragonruby.org', 5, 1]
+  args.outputs.sprites &lt;&lt; [576, 280, 128, 101, 'dragonruby.png']
+end
+</code></pre>
+<p>Open this file yourself in Visual Studio Code. Go ahead and do that: New Window &gt; Open &gt; [select the folder on your computer with the engine in it]</p>
+<p>Six lines of code to render text and an image? Not bad! (Trust me, if you did this all from scratch without an engine, it'd take hundreds of lines of code.)</p>
+<p>Here's what that code does, line by line:</p>
+<pre><code class="language-ruby">def tick args
+</code></pre>
+<p>This <code>def</code>ines a method called <code>tick</code> and passes in a parameter called <code>args</code>. <code>args</code> is short for arguments and is provided to us by DragonRuby GTK.</p>
+<p>Methods are reusable pieces of code that you can call to do something over and over again. Think of methods like verbs; they're actions. Methods are a foundational building block that allows for code reuse.</p>
+<p>Let's say you wanted to give a friend a cookie 🍪, you'd define a method called <code>give_cookie</code> and pass in the <code>friend</code> as a parameter. The friend then has a method called <code>eat</code> that we call, passing in a parameter of cookie.</p>
+<pre><code class="language-ruby">def give_cookie(friend)
+  friend.eat(&quot;cookie&quot;)
+end
+</code></pre>
+<p>You'd then call that method like:</p>
+<pre><code class="language-ruby">francis = Friend.new
+give_cookie(francis)
+</code></pre>
+<p>Note: methods in Ruby have optional parentheses. You can use them or leave them out when defining and calling your methods. These are the same:</p>
+<pre><code class="language-ruby">def give_cookie(friend)
+  friend.eat(&quot;cookie&quot;)
+end
+
+def give_cookie friend
+  friend.eat &quot;cookie&quot;
+end
+</code></pre>
+<p>I'm an agent of chaos and use <em>both</em> styles throughout the book. Gotta keep ya' on your toes!</p>
+<p>Wait, how'd we get talking about cookies and friends? Okay, back to the code above.</p>
+<p>The next three lines handle outputting text to the screen:</p>
+<pre><code class="language-ruby">  args.outputs.labels  &lt;&lt; [640, 500, 'Hello World!', 5, 1]
+  args.outputs.labels  &lt;&lt; [640, 460, 'Go to docs/docs.html and read it!', 5, 1]
+  args.outputs.labels  &lt;&lt; [640, 420, 'Join the Discord! https://discord.dragonruby.org', 5, 1]
+</code></pre>
+<p>Your eyes might be melting a little bit. But don't worry, wipe that melted bit of eye away and focus! It's pretty intuitive once you get the hang of it.</p>
+<p>Remember <code>args</code> from above? The parameter that's passed into <code>tick</code>? Well, you can call methods on it! This allows you to interact with the game engine.</p>
+<p><code>args</code> has a method called <code>outputs</code> that represents the data that gets rendered on the screen. You access it with <code>args.outputs</code>. Neato! <code>labels</code> is a method of <code>outputs</code>, see how the <code>.</code> chains things together?</p>
+<p>The <code>&lt;&lt;</code> is called the shovel operator. It lets you push data into a collection. <code>labels</code> is the collection we're shoveling data into because we want to render some text.</p>
+<p>And then finally the code within the brackets <code>[]</code> is an array of data that represents what we want to display on the screen. It may not be clear exactly what it's doing yet, but it'll become more clear over time.</p>
+<p>I think of arrays like a stack of CDs. The CDs are in a specific order, but you don't know what a given CD is unless you pull one out of the stack and look at it. You have to do the same thing with an array. In programming, you put data into an array to collect that data and keep track of it. If you want to know what's at a specific place in an array, you have to check.</p>
+<p>You can see some code in quotes, those are strings. And they're what's being displayed by the game. In order to show the text, though, we need to tell the engine where to place it on the screen. That's what the first two elements of the array do: they specify the x and y position of the text in the game. Then there's the text we want to render. That's followed by the text size. Then finally the alignment (centered in this case).</p>
+<p>Here's it broken down:</p>
+<pre><code class="language-ruby">#  x,   y,           text, size, alignment
+[640, 500, 'Hello World!',    5,         1]
+</code></pre>
+<p>Don't worry about memorizing what the positional elements of the array mean. This is just a quick way to render text. We'll start using a more friendly approach soon enough. The sample game does this three times, thus rendering three different pieces of text. The <code>y</code> coordinate is different for each, stacking them on top of each other vertically instead of overlapping one another.</p>
+<p>Gosh enough of this rambling, let's adjust some code. Change the text from <code>&quot;Hello World!&quot;</code> to <code>&quot;Hello Dragon!&quot;</code> and save the file.</p>
+<p><img src="./img/hello-dragon.jpg" alt="screenshot of the Hello Dragon! for DragonRuby GTK" /></p>
+<p>Did you see that? The game reloaded your code and changed the text to &quot;Hello Dragon!&quot; That was quick, wasn't it? That's one of the best parts of DRGTK—live reloading of your game code in the engine. This allows you to make changes to your game quickly, reducing the time between the cycles of writing your code and testing it.</p>
+<pre><code class="language-ruby">  args.outputs.sprites &lt;&lt; [576, 280, 128, 101, 'dragonruby.png']
+</code></pre>
+<p><code>args.outputs.sprites</code> is like <code>args.outputs.labels</code>, but instead of holding labels, it's a collection of sprites. It renders the <code>&quot;dragonruby.png&quot;</code> image at x: 576, y: 280, just like label text, and it also sets the size of the image to display. That's what the <code>128</code> and <code>101</code> represent in the array. Here's a breakdown of those elements:</p>
+<pre><code class="language-ruby">#  x,   y,   w,   h,            image
+[576, 280, 128, 101, 'dragonruby.png']
+</code></pre>
+<p>Just like with labels, don't worry about memorizing the order here. There are friendlier ways to use them that we'll get to shortly. But it's an easy enough bit of code for putting an image on the screen.</p>
+<p>Finally, the last line:</p>
+<pre><code class="language-ruby">end
+</code></pre>
+<p>signifies that the definition of the <code>tick</code> method is over. Any code after that isn't part of the <code>tick</code> method. That's it for what we get out of the box.</p>
+<h2 id="screen-coordinates-explained"><a class="header" href="#screen-coordinates-explained">Screen Coordinates Explained</a></h2>
+<p>Let's take a detour down Screen Coordinates Road. The <code>x</code> and <code>y</code> values are coordinates on the two-dimensional plane of the game window. Remember geometry? I barely do. But this is important, so don't doze off on me yet. We're only still in the first chapter!</p>
+<p><img src="./img/c01-coords.png" alt="diagram showing x, y axis with 0, 0 being in the bottom left and 1280, 720 being in the upper right" /></p>
+<p>DRGTK games are made up of a window that's 1280x720 pixels in size. That's 1280 pixels wide and 720 pixels tall. The rectangle of the game screen contains 921600 pixels, that's those two numbers multiplied. Each of those pixels has a coordinate on the plane. It makes it easy to refer to a specific pixel by using its <code>x</code> and <code>y</code> position.</p>
+<p>DRGTK starts 0, 0 in the lower left. So 1280, 720 would be the upper right. <strong>Note:</strong> this varies from most game engines, libraries, and tools, but it's intentional to make it easier to think about gravity and follows the geometric 2D plane that is taught in mathematics.</p>
+<p>It's important to keep coordinates in mind, as we'll be using them a lot when making our game. A major aspect of games is moving things around on the screen, which we do by changing their coordinates.</p>
+<h2 id="our-own-hello"><a class="header" href="#our-own-hello">Our Own Hello</a></h2>
+<p>Back to making the game. Okay, yeah, you changed a string and it changed what was displayed. That's neat. But let's hit reset and do it ourselves.</p>
+<p>I want you to delete the code in <code>mygame/app/main.rb</code>. Select it all and delete it. Yup, I know, the blank canvas is a challenge. But you need to start writing the code yourself in order to learn. So go ahead and type out each line below into your <code>main.rb</code>.</p>
+<pre><code class="language-ruby">def tick args
+  args.outputs.labels &lt;&lt; [120, 120, &quot;Hello Dragon!&quot;]
+end
+</code></pre>
+<p>You know what that does, right? Well, you saw it automatically reload in your game, so of course, you do!</p>
+<p>Let's greet our friend Oboe too.</p>
+<pre><code class="language-ruby">def tick args
+  args.outputs.labels &lt;&lt; [120, 120, &quot;Hello Dragon!&quot;]
+  args.outputs.labels &lt;&lt; [120, 100, &quot;Hello Oboe!&quot;]
+end
+</code></pre>
+<p>Wow, so many friends we're saying hello to! The thing is... that code is a bit... duplicative. Let's write our own method to clean that up:</p>
+<pre><code class="language-ruby">def greet friend
+  &quot;Hello #{friend}!&quot;
+end
+
+def tick args
+  args.outputs.labels &lt;&lt; [120, 120, greet(&quot;Dragon&quot;)]
+  args.outputs.labels &lt;&lt; [120, 100, greet(&quot;Oboe&quot;)]
+end
+</code></pre>
+<p>The new code refactors (changes the implementation of the code without changing the behavior) the original so that we can easily change the greeting in one place instead of many. This is a bit of a trivial example, but it shows how we can write our own methods in DRGTK to make our code better. Reusing code is fundamental for the rest of this book.</p>
+<p>The <code>&quot;Hello #{friend}!&quot;</code> code does what's called string interpolation. It takes whatever <code>friend</code> is, hopefully a name as a string, and inserts it. It's pretty similar to this code: <code>&quot;Hello &quot; + friend + &quot;!&quot;</code>, but quite a bit friendlier to use. The <code>#{}</code> tells Ruby to run any Ruby code within those curly braces.</p>
+<p>Methods in Ruby return a value. Return values can then be used by the caller for whatever purposes are needed. In the example above, the return value is the string we built. Ruby returns the vaue of the last line of the method definition automatically. But you can explicitly return early with <code>return</code>, which can be useful if you want to end the execution of a method early.</p>
+<p>Go ahead and change the <code>#greet</code> method to:</p>
+<pre><code class="language-ruby">def greet friend
+  &quot;Hello #{friend}!&quot;
+  1
+end
+</code></pre>
+<p>Whoa! What happened to our greetings? Well, we changed our code and it now always returns <code>1</code>, which isn't what we want. It's just an example to illustrate how that works. Go ahead and undo that change.</p>
+<p>Let's wrap up this chapter by displaying a sprite. In <code>mygame/sprites/misc/</code> there's a file named <code>dragon-0.png</code>. It's a pixel art dragon made by Nick Culbertson that's free to use. Pretty neat. Thanks, Nick!</p>
+<pre><code class="language-ruby">def greet friend
+  &quot;Hello #{friend}!&quot;
+end
+
+def tick args
+  args.outputs.labels &lt;&lt; [120, 120, greet(&quot;Dragon&quot;)]
+  args.outputs.labels &lt;&lt; [120, 100, greet(&quot;Oboe&quot;)]
+  args.outputs.sprites &lt;&lt; [120, 280, 100, 80, 'sprites/misc/dragon-0.png']
+end
+</code></pre>
+<p><img src="./img/hello-dragon-own.jpg" alt="screenshot of the Hello Dragon! with pixel dragon displayed" /></p>
+<p>That's some pretty fine code for the first chapter. We've got text and an image displaying. We learned about methods too. Don't worry if it's not all making total and complete sense. You'll understand more with time. Remember, be patient with yourself.</p>
+<h2 id="game-loop-explained"><a class="header" href="#game-loop-explained">Game Loop Explained</a></h2>
+<p>There's a lot of magic that comes from DragonRuby Game Toolkit, where we can just write <code>def tick</code> and magically have a game. What's happening is that DragonRuby Game Toolkit takes the code in <code>mygame/app/main.rb</code>, finds the <code>tick</code> method, and then runs a loop that calls it 60 times every second until the program closes. This loop is referred to as the Game Loop.</p>
+<p>When programming games, any number of things are happening at one time. Enemies are moving, images are being displayed, math is being calculated, input is being handled, etc. The loop runs over and over again, accounting for any changes in the state of the game. This is similar to how screens on devices work—they refresh so many times a second, so fast that it's barely perceptible to the human eye.</p>
+<p>Within the game loop, we'll keep track of everything that's happening, update state, and render text and images. It's important to begin to think about things in a loop, as it influences timing and code structure.</p>
+<p><img src="./img/c01-gameloop.png" alt="diagram showing game loop running 60x per second handling updating the world and rendering" /></p>
+<p>The game loop will begin to feel more natural over time, but for now, remember this: <strong>DRGTK runs the <code>tick</code> method 60 times every second</strong>.</p>
+<p>If you're familiar with games, you may know about frames per second (FPS). That's how many frames are rendered in a given second. 60 FPS is known for its smoothness and is often a target of many games. In DragonRuby GTK, the 60 ticks per second can be thought of as the same as your game running 60 frames per second (FPS).</p>
+<h2 id="whats-next"><a class="header" href="#whats-next">What's Next</a></h2>
+<p>Let's get the player dragon moving around on the screen when we press certain keys. Player input is foundational to making games and a great next step.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="02-player-movement.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="02-player-movement.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

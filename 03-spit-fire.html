@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Spit Fire - Building Games with DragonRuby</title>
+        <!-- Custom HTML head -->
+<meta property="og:title" content="Spit Fire | Building Games with DragonRuby">
+<meta property="og:type" content="book" />
+<meta property="og:image" content="https://book.dragonriders.community/img/cover.jpg" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Cover with red dragon icon and white background, which reads 'Building Games with DragonRuby: a comprehensive guide to shipping cross-platform guides with ease by Brett Chalupa and the Dragon Riders community'">
+
+        <meta name="description" content="A free book about making 2D games with DragonRuby Game Toolkit.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="01-hello-dragon.html"><strong aria-hidden="true">1.</strong> Hello Dragon!</a></li><li class="chapter-item expanded "><a href="02-player-movement.html"><strong aria-hidden="true">2.</strong> Player Movement</a></li><li class="chapter-item expanded "><a href="03-spit-fire.html" class="active"><strong aria-hidden="true">3.</strong> Spit Fire</a></li><li class="chapter-item expanded "><a href="04-target-practice.html"><strong aria-hidden="true">4.</strong> Target Practice</a></li><li class="chapter-item expanded "><a href="05-fireball-clean-up.html"><strong aria-hidden="true">5.</strong> Fireball Clean Up</a></li><li class="chapter-item expanded "><a href="06-time-attack.html"><strong aria-hidden="true">6.</strong> Time Attack</a></li><li class="chapter-item expanded "><a href="07-high-score.html"><strong aria-hidden="true">7.</strong> High-Score</a></li><li class="chapter-item expanded "><a href="08-sound.html"><strong aria-hidden="true">8.</strong> Sound</a></li><li class="chapter-item expanded "><a href="09-background.html"><strong aria-hidden="true">9.</strong> Background</a></li><li class="chapter-item expanded "><a href="10-animation.html"><strong aria-hidden="true">10.</strong> Animation</a></li><li class="chapter-item expanded "><a href="11-scenes.html"><strong aria-hidden="true">11.</strong> Scenes</a></li><li class="chapter-item expanded "><a href="12-ship-it.html"><strong aria-hidden="true">12.</strong> Ship It!</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="outro.html">Outro</a></li><li class="chapter-item expanded affix "><a href="ruby-primer.html">Ruby Primer</a></li><li class="chapter-item expanded affix "><a href="beyond-the-code.html">Beyond the Code</a></li><li class="chapter-item expanded affix "><a href="dragonruby-resources.html">DragonRuby Resources</a></li><li class="chapter-item expanded affix "><a href="game-dev-resources.html">Game Dev Resources</a></li><li class="chapter-item expanded affix "><a href="source-control.html">Source Control</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Building Games with DragonRuby</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/DragonRidersUnite/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="spit-fire"><a class="header" href="#spit-fire">Spit Fire</a></h1>
+<p>Our next mission is to make our dragon spit fire because that's just what they do. We'll piece this whole thing into a game soon enough. But let's keep focusing on simple mechanics and the code for right now.</p>
+<h2 id="fire-on-input"><a class="header" href="#fire-on-input">Fire on Input</a></h2>
+<p>In the last chapter, we used <code>args.inputs</code> to check for player input from the four main directions. If those inputs are pressed, then we move the dragon. Now let's check to see if the <kbd>Z</kbd> key is pressed to know when to have our dragon spit a fireball.</p>
+<p>To check if a key was pressed, we can use <code>args.inputs.keyboard.key_down</code> and then whatever key we want to check. So in our case, we'll check <code>args.inputs.keyboard.key_down.z</code>. In our <code>#tick</code> method, right above where we render the dragon sprite, let's check for that input:</p>
+<pre><code class="language-ruby">  if args.inputs.keyboard.key_down.z
+    puts &quot;Z key pressed&quot;
+  end
+
+  args.outputs.sprites &lt;&lt; [args.state.player_x, args.state.player_y, player_w, player_h, 'sprites/misc/dragon-0.png']
+</code></pre>
+<p>Using <code>puts</code> is a really helpful way to check that our game works as we expect it to. In this case, every tick where the <kbd>Z</kbd> key is pressed down, it prints the string &quot;Z key pressed&quot; to the console (open it with <kbd>~</kbd>, remember?). Run your game and press the <kbd>Z</kbd> key a bunch and then open your console.</p>
+<img alt="screenshot of DragonRuby console showing Z key pressed 6 times" src="./img/c03-console-puts.jpg" style="max-width: 420px; width: 100%;">
+<h2 id="expanded-control-support"><a class="header" href="#expanded-control-support">Expanded Control Support</a></h2>
+<p>When making a game, it's important to support a variety of input configurations to make the game as accessible as possible. Sure, the keyboard arrow keys and the <kbd>Z</kbd> key are sensible defaults. But what if our player wants to use a gamepad controller? Or what if they would prefer to use WASD for movement? From the start of coding player input, let's support as many different inputs as reasonably possible.</p>
+<p>In our case, we'll support three configurations:</p>
+<ul>
+<li>Arrow keys and <kbd>Z</kbd></li>
+<li>WASD and <kbd>J</kbd></li>
+<li>Gamepad</li>
+</ul>
+<p>DragonRuby GTK is a big help in this department. Our code earlier that checks <code>args.inputs.up</code> (down/left/right) already checks for the arrow keys, WASD, and gamepad input. Slick! We don't have to change anything there. But let's go ahead and update our logic check for firing the fireball to check all of the possible inputs.</p>
+<pre><code class="language-ruby">  if args.inputs.keyboard.key_down.z ||
+      args.inputs.keyboard.key_down.j ||
+      args.inputs.controller_one.key_down.a
+    puts &quot;Spit fireball!&quot;
+  end
+</code></pre>
+<p>We learned about <code>||=</code> earlier, and that's a combination of two separate operators in Ruby. <code>||</code> represents &quot;or&quot; and <code>=</code> says to assign a value. If the value on the left doesn't have a value, assign it the value on the right. We can make use of the &quot;or&quot; (<code>||</code>) operator independently of the assignment operator (<code>=</code>) to control the logic within our game.</p>
+<p>The code above says: if the <kbd>Z</kbd> key is down OR the <kbd>J</kbd> key is down OR the A button on the gamepad is pressed, then output the string to the console.</p>
+<p>You can combine <code>||</code> on one line (<code>if monday || tuesday || wednesday</code>), but it can be helpful to break long lines to make our code easier to read.</p>
+<p>Outputting info to the console isn't that helpful for the player, but can you begin to imagine how we'll use that check to instead spit a fireball.</p>
+<h2 id="displaying-fireballs"><a class="header" href="#displaying-fireballs">Displaying Fireballs</a></h2>
+<p>We want to display a fireball on the screen when the action key is pressed. We've got most of the code, all we need to do is change <code>puts</code> to instead display the fireball.</p>
+<p>At the top of <code>#tick</code> (<code>#name</code> is Ruby shorthand for &quot;the <code>name</code> method&quot;), assign an empty array to <code>args.state.fireballs</code> if nothing has been assigned yet. This will let us keep track of fireballs across the game loop to do all sorts of things with them (display them, move them, collide them with other objects):</p>
+<pre><code class="language-ruby">def tick args
+  args.state.player_x ||= 120
+  args.state.player_y ||= 280
+  args.state.fireballs ||= []
+</code></pre>
+<p>Then where we check for the action input, push a fireball into the <code>arg.state.fireballs</code> array based on the current player's x and y position:</p>
+<pre><code class="language-ruby">  if args.inputs.keyboard.key_down.z ||
+      args.inputs.keyboard.key_down.j ||
+      args.inputs.controller_one.key_down.a
+    args.state.fireballs &lt;&lt; [args.state.player_x, args.state.player_y, 'fireball']
+  end
+
+  args.outputs.labels &lt;&lt; args.state.fireballs
+
+</code></pre>
+<p>All we have to do is render our fireballs by pushing them into the <code>args.outputs.labels</code> collection. DragonRuby is smart enough to know that if we push an array into any <code>args.outputs</code> collection it'll flatten it and display them correctly. Thanks, DragonRuby!</p>
+<p>We use arrays to represent various data in our game like labels and sprites, but we can create our own arrays to keep track of the data in our game. Arrays are a great way to collect data that we then use throughout our game. In this case, we're maintaining a collection of fireballs.</p>
+<p>Play your game and see what happens! Fireballs everywhere. Wait! You're not impressed by those fireballs? I'd be pretty frightened if the word &quot;fireball&quot; was flying at me.</p>
+<p><img src="./img/c03-fireball-display.jpg" alt="screenshot of the game showing the word 'fireball' throughout with the dragon flying around" /></p>
+<p>Wait, where are you going? Why are you muttering &quot;I didn't sign up to read no stinkin' book where you output the word 'fireball' on the screen, I'm here for the real flame, the good stuff...&quot;</p>
+<h2 id="moving-fireballs"><a class="header" href="#moving-fireballs">Moving Fireballs</a></h2>
+<p>Guess what? We're sticking with ole &quot;fireball&quot; for now! It's silly and fun and I haven't found a good fireball sprite to use. We'll get there, we'll get there. But let's first make the fireballs move across the screen.</p>
+<p>When we moved our player dragon, we took the x and y position and added or subtracted values in each <code>#tick</code> based upon if any directional input was pressed. Our fireballs will move regardless of any button pressed once they're extruded from our dragon's mouth. Because our game is simple and the dragon only faces to the right, all of the fireballs will move to the right. How do we go about that on our X-Y axis? We just increase the <code>x</code> position of the fireball each tick. Let's do that and see what happens:</p>
+<pre><code class="language-ruby">  if args.inputs.keyboard.key_down.z ||
+      args.inputs.keyboard.key_down.j ||
+      args.inputs.controller_one.key_down.a
+    args.state.fireballs &lt;&lt; [args.state.player_x, args.state.player_y, 'fireball']
+  end
+
+  args.state.fireballs.each do |fireball|
+    fireball[0] += speed + 2
+  end
+
+  args.outputs.labels &lt;&lt; args.state.fireballs
+</code></pre>
+<p>Right between where we add a new fireball to <code>args.state.fireballs</code> and we display them using <code>args.outputs.labels</code>, our new code does this:</p>
+<ol>
+<li>Loops through the array of <code>args.state.fireballs</code></li>
+<li>For each fireball, updates the array value at the <code>0</code> index, which is the x position of the fireball, to be the dragon's speed plus 2 (because we want the fireball to move faster than the dragon).</li>
+</ol>
+<p>Move your dragon around, spit some fire, and bask in the glory of a word moving so smoothly across the screen that it almost looks like a... fireball!</p>
+<p>Try changing around <code>speed + 2</code> to make the fireballs move faster or slower and see how that feels. Adjusting speed values can really change the vibe of your game and is important in tuning it to feel just right.</p>
+<p>There are a lot of important concepts in those three newly added lines of code. In Ruby, when there's an array of data, we can loop through <strong>each</strong> item and modify their properties. Games are composed of huge collections of things: enemies, fireballs, menu options, player inventory. Arrays (and just collections in general) aren't anything to be afraid of, and soon enough, you'll be naturally thinking of your game data in terms of arrays.</p>
+<p>Looping through an array of data in each <code>#tick</code> and then doing <em>something</em> is the stuff games are made of! Here are some ways this can be applied in all sorts of games: enemy behavior, checking for collision, animating. As our game (and any game you make) gets more complex, looping through collections of data becomes more and more common.</p>
+<h2 id="switching-to-hashes"><a class="header" href="#switching-to-hashes">Switching to Hashes</a></h2>
+<p>So far throughout the book we've been using arrays to represent the entities in our game, whether it be the player's dragon sprite or our fireball text that gets displayed. Remember <code>[args.state.player_x, args.state.player_y, 'fireball']</code>? Arrays are wonderful and important, but they aren't so great for representing structured data because it's difficult to remember what each piece of data in the array's positions represents. Remembering that <code>fireball[2]</code> is the text value and not the y value is tricky. Luckily, DragonRuby has a more verbose and clear data structure we can use for managing our data. It's called a hash! Much like arrays, hashes are extremely useful.</p>
+<p>Let's look at what the text example above would be like as a hash:</p>
+<pre><code class="language-ruby">{
+  x: args.state.player_x,
+  y: args.state.player_y,
+  text: &quot;fireball&quot;,
+}
+</code></pre>
+<p>Hashes are expressed through curly braces <code>{}</code> and contain <code>key: value</code> pairs separated by commas. The values of a hash can be anything, from numbers to strings to whatever your heart desires. Let's say we wanted to build our own hash to represent a dragon and put it in the <code>dragon</code> variable:</p>
+<pre><code class="language-ruby">dragon = {
+  name: &quot;Francis&quot;,
+  size: &quot;medium&quot;,
+  age: 541,
+}
+</code></pre>
+<p>Values of a hash are then accessed by their keys, so <code>dragon.name</code> returns the string <code>&quot;Francis&quot;</code>, <code>dragon.size</code> returns the string <code>&quot;medium&quot;</code>, and <code>dragon.age</code> returns the number <code>541</code>. This is much more clear than having to remember the position of these values within an array.</p>
+<p>Quick note: if you see a hash with key-value pairs that look like this: <code>{ :name =&gt; &quot;Francis&quot; }</code>, don't fret! That's just an another style in Ruby known as the hash rocket.</p>
+<p>In general, differentiate between arrays and hashes like this: <strong>hashes are used represent one piece of data with multiple properties</strong> and <strong>arrays are used to collect data (often times hashes) to keep track of and manipulate them</strong>.</p>
+<p>Below is our entire game translated to use hashes instead of arrays for our rendering:</p>
+<pre><code class="language-ruby">def tick args
+  args.state.player ||= {
+    x: 120,
+    y: 280,
+    w: 100,
+    h: 80,
+    speed: 12,
+    path: 'sprites/misc/dragon-0.png',
+  }
+  args.state.fireballs ||= []
+
+  if args.inputs.left
+    args.state.player.x -= args.state.player.speed
+  elsif args.inputs.right
+    args.state.player.x += args.state.player.speed
+  end
+
+  if args.inputs.up
+    args.state.player.y += args.state.player.speed
+  elsif args.inputs.down
+    args.state.player.y -= args.state.player.speed
+  end
+
+  if args.state.player.x +  args.state.player.w &gt; args.grid.w
+    args.state.player.x = args.grid.w - args.state.player.w
+  end
+
+  if args.state.player.x &lt; 0
+    args.state.player.x = 0
+  end
+
+  if args.state.player.y + args.state.player.h &gt; args.grid.h
+    args.state.player.y = args.grid.h - args.state.player.h
+  end
+
+  if args.state.player.y &lt; 0
+    args.state.player.y = 0
+  end
+
+  if args.inputs.keyboard.key_down.z ||
+      args.inputs.keyboard.key_down.j ||
+      args.inputs.controller_one.key_down.a
+    args.state.fireballs &lt;&lt; {
+      x: args.state.player.x,
+      y: args.state.player.y,
+      text: 'fireball',
+    }
+  end
+
+  args.state.fireballs.each do |fireball|
+    fireball.x += args.state.player.speed + 2
+  end
+
+  args.outputs.labels &lt;&lt; args.state.fireballs
+  args.outputs.sprites &lt;&lt; args.state.player
+end
+</code></pre>
+<p>It may not seem like much has changed, but there are two key changes that make this worthwhile:</p>
+<ol>
+<li><code>fireball.x += args.state.player.speed + 2</code> — it is much clearer when we move the fireball that we're adding to its <code>x</code> position AND using the player's speed</li>
+<li><code>args.outputs.sprites &lt;&lt; args.state.player</code> — because we're keeping track of our player in <code>args.state.player</code> and it has the data DragonRuby needs to render it, we can just push it into <code>args.outputs.sprites</code> and not construct the array that we used to use</li>
+</ol>
+<h2 id="displaying-a-sprite"><a class="header" href="#displaying-a-sprite">Displaying a Sprite</a></h2>
+<p>With that refactor done, let's display a sprite for our fireball and call it a chapter.</p>
+<p>Download the fireball sprite below and put it in <code>mygame/sprites/fireball.png</code>:</p>
+<p><img src="./code/chapter_03/06_sprite/sprites/fireball.png" alt="fireball sprite" /></p>
+<p>I just made that! It's not half bad, right?</p>
+<p>We'll change the hash we push into <code>args.state.fireballs</code> to be a sprite and adjust how we render that collection. Nothing too major. Here are the changes near the bottom of <code>#tick</code> that you'll need to make:</p>
+<pre><code class="language-ruby">  if args.inputs.keyboard.key_down.z ||
+      args.inputs.keyboard.key_down.j ||
+      args.inputs.controller_one.key_down.a
+    args.state.fireballs &lt;&lt; {
+      x: args.state.player.x + args.state.player.w - 12,
+      y: args.state.player.y + 10,
+      w: 32,
+      h: 32,
+      path: 'sprites/fireball.png',
+    }
+  end
+
+  args.state.fireballs.each do |fireball|
+    fireball.x += args.state.player.speed + 2
+  end
+
+  args.outputs.sprites &lt;&lt; [args.state.player, args.state.fireballs]
+</code></pre>
+<p>We adjust the starting place of the fireball sprite to look like it comes out of the dragon's mouth. The sprite is 32 pixels wide by 32 pixels tall, so we set that.</p>
+<p>Now that the fireball is a sprite and not a text label, we can push both the player and the array of fireballs into <code>args.outputs.sprites</code> in one go. This is more efficient for DragonRuby than doing it separately.</p>
+<p><img src="./img/c03-fireball-sprite.jpg" alt="dragon sprite shooting 4 fireballs flying across the screen" /></p>
+<h2 id="whats-next"><a class="header" href="#whats-next">What's Next</a></h2>
+<p>We're so close to having a game, so close! We just need something to spit fireballs at, right? In the next chapter, we'll display some floating targets that get destroyed when a fireball hits one.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="02-player-movement.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="04-target-practice.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="02-player-movement.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="04-target-practice.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
